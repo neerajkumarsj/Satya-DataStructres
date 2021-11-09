@@ -30,8 +30,7 @@ int insert_after(node **head, data_t data, data_t odata)
 		old = old->link;
 		if (old->data != odata && temp->link == NULL)
 		{
-			temp->link = new;
-			return SUCCESS;
+			return OUT_OF_RANGE;
 		}
 	}
 	old->link = new;

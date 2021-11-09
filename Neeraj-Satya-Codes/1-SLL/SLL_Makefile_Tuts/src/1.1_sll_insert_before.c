@@ -1,15 +1,15 @@
 /*
     Implementation of Single Linked List
     ====================================
-    - File Type: Insert_after function file
+    - File Type: Insert_before function file
 */
 #include "sll.h"
 
-int insert_after(node **head, data_t data, data_t odata)
+int insert_before(node **head, data_t data, data_t odata)
 {
 	node *temp, *old;
-	old = *head;
-	if (old->link == NULL)
+	temp = *head;
+	if (temp->link == NULL)
 	{
 		insert_at_last(head, data);
 		return OUT_OF_RANGE;
@@ -21,20 +21,19 @@ int insert_after(node **head, data_t data, data_t odata)
 		return FAILURE;
 	}
 
-	temp = old->link;
+	old = temp->link;
 	new->data = data;
 	new->link = NULL;
 	while (old->data != odata)
 	{
 		temp = temp->link;
 		old = old->link;
-		if (old->data != odata && temp->link == NULL)
+		if (old->data != odata && old->link == NULL)
 		{
-			temp->link = new;
-			return SUCCESS;
+			return OUT_OF_RANGE;
 		}
 	}
-	old->link = new;
-	new->link = temp;
+	temp->link = new;
+	new->link = old;
 	return SUCCESS;
 }
